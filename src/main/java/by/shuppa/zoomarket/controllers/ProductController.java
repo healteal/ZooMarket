@@ -14,9 +14,7 @@ public class ProductController {
     private final ProductService productService;
     @GetMapping("/")
     public String mainPage(Model model) {
-        if (!productService.listProducts().isEmpty()) {
-            model.addAttribute("products", productService.listProducts());
-        }
+        model.addAttribute("products", productService.listProducts());
         return "main-page";
     }
 

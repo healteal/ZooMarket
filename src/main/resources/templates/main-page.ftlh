@@ -34,17 +34,23 @@
     </div>
 </header>
 <#if products??>
-    <#list products as product>
-        <h3>${product.name}</h3><br>
-        <h4>${product.description}</h4><br>
-        <h4>${product.price}</h4><br>
-        <h4>${product.author}</h4><br><hr>
-    </#list>
+    <div class="container">
+        <div class="row row-cols-3">
+            <#list products as product>
+            <div class="col-4">
+                    ${product.name}<br>
+                    ${product.description}<br>
+                    ${product.price}<br>
+                    ${product.author}<br>
+            </div>
+                </#list>
+        </div>
+    </div>
 <#else>
     <h1>Товаров нет :(</h1>
 </#if>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
