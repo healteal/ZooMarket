@@ -46,7 +46,6 @@
                             <p class="card-text">
                             <h3>${product.name}</h3>
                             <h4>${product.description}</h4>
-                            </p>
                             <div class="d-flex justify-content-between align-items-center" bis_skin_checked="1">
                                 <div class="btn-group" bis_skin_checked="1">
                                     <a href="/product/${product.id}">
@@ -65,8 +64,5 @@
 <#else>
     <h1>Товаров нет :(</h1>
 </#if>
-</div>
-</div>
-</div>
 </body>
 </html>
