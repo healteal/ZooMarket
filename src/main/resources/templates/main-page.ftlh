@@ -37,13 +37,29 @@
     <div class="container">
         <div class="row row-cols-3">
             <#list products as product>
-            <div class="col-4">
-                    ${product.name}<br>
-                    ${product.description}<br>
-                    ${product.price}<br>
-                    ${product.author}<br>
-            </div>
-                </#list>
+                <div class="col-4">
+                    <div class="card shadow-sm" bis_skin_checked="1">
+                        <svg class="bd-placeholder-img card-img-top" height="250px">
+                            <image href="/product/image/${product.getIdOfMainImage()}" height="100%" width="100%" />
+                        </svg>
+                        <div class="card-body" bis_skin_checked="1">
+                            <p class="card-text">
+                            <h3>${product.name}</h3>
+                            <h4>${product.description}</h4>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center" bis_skin_checked="1">
+                                <div class="btn-group" bis_skin_checked="1">
+                                    <a href="/product/${product.id}">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            Подробнее
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </#list>
         </div>
     </div>
 <#else>

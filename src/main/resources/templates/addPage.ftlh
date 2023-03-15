@@ -32,7 +32,7 @@
     </div>
 </header>
 <div class="w-50 mx-auto">
-    <form action="/add" method="post">
+    <form action="/add" method="post" enctype="multipart/form-data">
         <div class="col-sm-6 mx-auto" bis_skin_checked="1">
             <label class="form-label">Название</label>
             <input type="text" class="form-control" name="name" value="" required="required">
@@ -60,6 +60,11 @@
             <div class="invalid-feedback" bis_skin_checked="1">
                 Необходимо ввести автора
             </div>
+        </div>
+        <div>
+            <input type="file" name = "first_image">
+            <input type="file" name = "second_image">
+            <input type="file" name = "third_image">
         </div>
         <br>
         <div class="text-center">
