@@ -33,18 +33,29 @@
 </header>
 <div class="w-50 mx-auto">
     <main class="form-signin w-50 m-auto">
-        <form method="post" action="/login">
+        <form method="post" action="/registration">
             <div class="form-floating" bis_skin_checked="1">
-                <input type="text" class="form-control" id="floatingInput" name="email" placeholder="Псевдоним"
-                       required="required">
+                <input type="username" class="form-control" id="floatingInput" name="username" placeholder="Псевдоним" required="required">
             </div>
             <br>
             <div class="form-floating" bis_skin_checked="1">
-                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль"
-                       required="required">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Электронная почта" required="required">
             </div>
             <br>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+            <div class="form-floating" bis_skin_checked="1">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль" required="required">
+            </div>
+            <br>
+            <div class="form-floating" bis_skin_checked="1">
+                <input type="number" class="form-control" id="floatingInput" name="number" placeholder="Телефон" required="required">
+            </div>
+            <br>
+            <br>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Зарегистрироваться</button>
+            <br>
+            <#if message??>
+                ${message}
+            </#if>
         </form>
     </main>
 </div>

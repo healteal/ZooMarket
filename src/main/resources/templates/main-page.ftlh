@@ -11,12 +11,7 @@
 </head>
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-    </a>
-
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"></a>
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
@@ -39,13 +34,15 @@
             <#list products as product>
                 <div class="col-4">
                     <div class="card shadow-sm" bis_skin_checked="1">
+                        <br>
                         <svg class="bd-placeholder-img card-img-top" height="250px">
                             <image href="/product/image/${product.getIdOfMainImage()}" height="100%" width="100%" />
                         </svg>
                         <div class="card-body" bis_skin_checked="1">
                             <p class="card-text">
                             <h3>${product.name}</h3>
-                            <h4>${product.description}</h4>
+                            <h5>${product.description}</h5>
+                            <br>
                             <div class="d-flex justify-content-between align-items-center" bis_skin_checked="1">
                                 <div class="btn-group" bis_skin_checked="1">
                                     <a href="/product/${product.id}">
