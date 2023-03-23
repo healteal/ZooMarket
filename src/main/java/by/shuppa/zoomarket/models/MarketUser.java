@@ -1,15 +1,13 @@
 package by.shuppa.zoomarket.models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -27,11 +25,13 @@ public class MarketUser implements UserDetails {
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserRole> userRoles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "marketUser")
+    private List<Product> products = new ArrayList<>();
     private boolean enable;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return userRoles;
     }
 
     @Override

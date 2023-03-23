@@ -35,7 +35,7 @@
     <main class="form-signin w-50 m-auto">
         <form method="post" action="/login">
             <div class="form-floating" bis_skin_checked="1">
-                <input type="text" class="form-control" id="floatingInput" name="email" placeholder="Псевдоним"
+                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Логин"
                        required="required">
             </div>
             <br>
@@ -46,6 +46,9 @@
             <br>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
         </form>
+        <#if message??>
+            ${message}
+        </#if>
     </main>
 </div>
 </body>

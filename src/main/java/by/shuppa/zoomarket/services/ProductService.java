@@ -1,28 +1,34 @@
 package by.shuppa.zoomarket.services;
 
+import by.shuppa.zoomarket.models.MarketUser;
 import by.shuppa.zoomarket.models.Product;
 import by.shuppa.zoomarket.models.ProductImage;
 import by.shuppa.zoomarket.repositories.ProductRepository;
+import by.shuppa.zoomarket.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
     public List<Product> listProducts() {
         return productRepository.findAll();
     }
 
-    public void addProduct(Product product,
+    public void addProduct(Principal principal,
+                           Product product,
                            MultipartFile firstImage,
                            MultipartFile secondImage,
                            MultipartFile thirdImage) {
+        product.setMarketUser(getUserByPrincipal(principal));
         Product temporaryProduct = productRepository.save(product);
         addImage(temporaryProduct, firstImage);
         addImage(temporaryProduct, secondImage);
@@ -30,6 +36,13 @@ public class ProductService {
         temporaryProduct = productRepository.save(temporaryProduct);
         temporaryProduct.setIdOfMainImage(temporaryProduct.getProductImages().get(0).getId());
         productRepository.save(temporaryProduct);
+    }
+
+    public MarketUser getUserByPrincipal(Principal principal) {
+        if (principal != null) {
+            return userRepository.findByUsername(principal.getName());
+        }
+        return new MarketUser();
     }
 
     private void addImage(Product product, MultipartFile file) {

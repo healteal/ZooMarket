@@ -1,10 +1,10 @@
 package by.shuppa.zoomarket.models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +23,12 @@ public class Product {
     private Double price;
     private Double rating;
     @Column(columnDefinition = "nvarchar(255)")
-    private String author;
     private Long idOfMainImage;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<ProductImage> productImages = new ArrayList<>();
-
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private MarketUser marketUser;
 
     public void addProductImage(ProductImage productImage) {
         productImages.add(productImage);

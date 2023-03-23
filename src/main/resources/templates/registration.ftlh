@@ -35,7 +35,7 @@
     <main class="form-signin w-50 m-auto">
         <form method="post" action="/registration">
             <div class="form-floating" bis_skin_checked="1">
-                <input type="username" class="form-control" id="floatingInput" name="username" placeholder="Псевдоним" required="required">
+                <input type="username" class="form-control" id="floatingInput" name="username" placeholder="Логин" required="required">
             </div>
             <br>
             <div class="form-floating" bis_skin_checked="1">

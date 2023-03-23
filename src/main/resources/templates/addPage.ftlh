@@ -54,13 +54,7 @@
                 Необходимо ввести цену
             </div>
         </div>
-        <div class="col-sm-6 mx-auto" bis_skin_checked="1">
-            <label class="form-label">Автор</label>
-            <input type="text" class="form-control" name="author" required="required">
-            <div class="invalid-feedback" bis_skin_checked="1">
-                Необходимо ввести автора
-            </div>
-        </div>
+        <br>
         <div>
             <input type="file" name = "first_image">
             <input type="file" name = "second_image">

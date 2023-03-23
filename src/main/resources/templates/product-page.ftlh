@@ -73,11 +73,10 @@
         <div class="col-4 text-center border border-primary"><h3>Цена</h3></div>
         <div class="col-8 border border-primary"><h3>${product.price} BYN</h3></div>
     </div>
-
-    <div class="row">
-        <div class="col-4 text-center border border-primary"><h3>Автор</h3></div>
-        <div class="col-8 border border-primary"><h3>${product.author}</h3></div>
-    </div>
+<#--    <div class="row">-->
+<#--        <div class="col-4 text-center border border-primary"><h3>Автор</h3></div>-->
+<#--        <div class="col-8 border border-primary"><h3>${product.getMarketUser().username}</h3></div>-->
+<#--    </div>-->
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

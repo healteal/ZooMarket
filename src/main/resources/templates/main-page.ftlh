@@ -17,15 +17,18 @@
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
     </ul>
-
     <div class="col-md-3 text-end" bis_skin_checked="1">
-        <a href="/login">
-            <button type="button" class="btn btn-outline-primary me-2">Войти
-            </button>
-        </a>
-        <a href="/registration">
-            <button type="button" class="btn btn-primary">Регистрация</button>
-        </a>
+        <#if marketUser??>
+            Добро пожаловать ${marketUser.username}
+            <#else>
+                <a href="/login">
+                    <button type="button" class="btn btn-outline-primary me-2">Войти
+                    </button>
+                </a>
+                <a href="/registration">
+                    <button type="button" class="btn btn-primary">Регистрация</button>
+                </a>
+        </#if>
     </div>
 </header>
 <#if products??>
