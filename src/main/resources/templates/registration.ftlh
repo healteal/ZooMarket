@@ -11,24 +11,32 @@
 </head>
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-    </a>
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"></a>
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
-        <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+        <#if marketUser??>
+            <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+        </#if>
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
-        <a href="/login">
-            <button type="button" class="btn btn-outline-primary me-2">Войти
-            </button>
-        </a>
-        <a href="/registration">
-            <button type="button" class="btn btn-primary">Регистрация</button>
-        </a>
+        <#if marketUser??>
+            <a href="/user/${marketUser.id}">
+                <button type="button" class="btn btn-outline-primary me-2">Аккаунт
+                </button>
+            </a>
+            <a href="/logout">
+                <button type="button" class="btn btn-primary">Выйти</button>
+            </a>
+        <#else>
+            <a href="/login">
+                <button type="button" class="btn btn-outline-primary me-2">Войти
+                </button>
+            </a>
+            <a href="/registration">
+                <button type="button" class="btn btn-primary">Регистрация</button>
+            </a>
+        </#if>
     </div>
 </header>
 <div class="w-50 mx-auto">
