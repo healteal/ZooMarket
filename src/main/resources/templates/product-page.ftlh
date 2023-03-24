@@ -73,20 +73,42 @@
 </div>
 <br>
 <div class="container">
+    <#if productOwner??>
+    <form action="/edit/product/${product.id}" method="post">
     <div class="row">
         <div class="col-4 text-center border border-primary"><h3>Описание</h3></div>
-        <div class="col-8 border border-primary"><h3>${product.description}</h3></div>
+        <input name="description" class="col-8 border border-primary" placeholder="${product.description}" />
     </div>
     <div class="row">
         <div class="col-4 text-center border border-primary"><h3>Цена</h3></div>
-        <div class="col-8 border border-primary"><h3>${product.price} BYN</h3></div>
+        <input type="number" name="price" class="col-8 border border-primary" placeholder="${product.price} BYN" />
     </div>
-<#--    <div class="row">-->
-<#--        <div class="col-4 text-center border border-primary"><h3>Автор</h3></div>-->
-<#--        <div class="col-8 border border-primary"><h3>${product.getMarketUser().username}</h3></div>-->
-<#--    </div>-->
+        <input type="submit" value="Изменить">
+    </form>
 </div>
+        <#else>
+            <div class="row">
+                <div class="col-4 text-center border border-primary"><h3>Описание</h3></div>
+                <div class="col-8 border border-primary"><h3>${product.description}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-4 text-center border border-primary"><h3>Цена</h3></div>
+                <div class="col-8 border border-primary"><h3>${product.price} BYN</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-4 text-center border border-primary"><h3>Автор</h3></div>
+                <div class="col-8 border border-primary"><h3>${product.marketUser.username}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-4 text-center border border-primary"><h3>Номер</h3></div>
+                <div class="col-8 border border-primary"><h3>${product.marketUser.number}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-4 text-center border border-primary"><h3>Почта</h3></div>
+                <div class="col-8 border border-primary"><h3>${product.marketUser.email}</h3></div>
+            </div>
 </div>
+        </#if>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

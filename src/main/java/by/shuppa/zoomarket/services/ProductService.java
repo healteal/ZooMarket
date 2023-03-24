@@ -29,11 +29,10 @@ public class ProductService {
                            MultipartFile secondImage,
                            MultipartFile thirdImage) {
         product.setMarketUser(getUserByPrincipal(principal));
+        addImage(product, firstImage);
+        addImage(product, secondImage);
+        addImage(product, thirdImage);
         Product temporaryProduct = productRepository.save(product);
-        addImage(temporaryProduct, firstImage);
-        addImage(temporaryProduct, secondImage);
-        addImage(temporaryProduct, thirdImage);
-        temporaryProduct = productRepository.save(temporaryProduct);
         temporaryProduct.setIdOfMainImage(temporaryProduct.getProductImages().get(0).getId());
         productRepository.save(temporaryProduct);
     }

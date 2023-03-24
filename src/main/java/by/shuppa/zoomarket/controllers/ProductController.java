@@ -33,7 +33,11 @@ public class ProductController {
     }
 
     @GetMapping("/add")
-    public String showAddPage() {
+    public String showAddPage(Model model,
+                              Principal principal) {
+        if (productService.getUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+        }
         return "addPage";
     }
 
@@ -52,10 +56,24 @@ public class ProductController {
                               Model model,
                               Principal principal) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
+            if (productService.getUserByPrincipal(principal).getProducts().contains(productRepository.findById(id).orElseThrow())) {
+                model.addAttribute("productOwner", Boolean.TRUE);
+            }
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
         }
         model.addAttribute("product", productRepository.findById(id).orElseThrow());
         model.addAttribute("productImages", productRepository.findById(id).orElseThrow().getProductImages());
         return "product-page";
+    }
+
+    @PostMapping("/edit/product/{id}")
+    public String editProduct(@PathVariable Long id,
+                              @RequestParam(name = "description", required = false) String description,
+                              @RequestParam(name = "price", required = false) Double price) {
+        Product temporary = productRepository.findById(id).orElseThrow();
+        temporary.setDescription(description);
+        temporary.setPrice(price);
+        productRepository.save(temporary);
+        return "redirect:/product/{id}";
     }
 }
