@@ -20,7 +20,8 @@ public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
     @GetMapping("/")
-    public String mainPage(Model model, Principal principal) {
+    public String mainPage(Model model,
+                           Principal principal) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
         }
@@ -47,7 +48,12 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public String showProduct(@PathVariable Long id, Model model) {
+    public String showProduct(@PathVariable Long id,
+                              Model model,
+                              Principal principal) {
+        if (productService.getUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+        }
         model.addAttribute("product", productRepository.findById(id).orElseThrow());
         model.addAttribute("productImages", productRepository.findById(id).orElseThrow().getProductImages());
         return "product-page";

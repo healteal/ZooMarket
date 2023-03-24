@@ -25,7 +25,7 @@ public class UserService {
         user.setEnable(true);
         user.getUserRoles().add(UserRole.USER);
         userRepository.save(user);
-        log.info("Save new user {}", user.getUsername());
+        log.info("Save new marketUser {}", user.getUsername());
         return true;
     }
 

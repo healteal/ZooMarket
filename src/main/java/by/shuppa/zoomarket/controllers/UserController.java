@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -25,7 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Principal principal, Model model) {
+    public String login(Principal principal,
+                        Model model) {
         if (userService.getMarketUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("user", userService.getMarketUserByPrincipal(principal));
             log.info("logged as {}", userService.getMarketUserByPrincipal(principal).getUsername());
@@ -36,7 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String createUser(MarketUser marketUser, Model model) {
+    public String createUser(MarketUser marketUser,
+                             Model model) {
         if (userRepository.findByUsername(marketUser.getUsername()) != null) {
             model.addAttribute("message", "Такой логин уже есть в системе.");
             return "/registration";
@@ -47,5 +50,17 @@ public class UserController {
             model.addAttribute("message", "Неверный ввод");
         }
         return "/registration";
+    }
+
+    @GetMapping("/user/{id}")
+    public String userPage(@PathVariable Long id,
+                           Model model,
+                           Principal principal) {
+        if (!userRepository.findById(id).orElseThrow().equals(userRepository.findByUsername(principal.getName()))) {
+            return "redirect:/";
+        }
+        model.addAttribute("marketUser", userRepository.findById(id).orElseThrow());
+        model.addAttribute("products", userRepository.findById(id).orElseThrow().getProducts());
+        return "user-page";
     }
 }
