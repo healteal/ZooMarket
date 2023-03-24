@@ -64,9 +64,9 @@
         </div>
         <br>
         <div>
-            <input type="file" name = "first_image">
-            <input type="file" name = "second_image">
-            <input type="file" name = "third_image">
+            <input type="file" name = "first_image" required="required">
+            <input type="file" name = "second_image" required="required">
+            <input type="file" name = "third_image" required="required">
         </div>
         <br>
         <div class="text-center">

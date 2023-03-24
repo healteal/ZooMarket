@@ -21,7 +21,7 @@
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
         <#if marketUser??>
-            <a href="/user/${marketUser.id}">
+            <a href="/user/${user.id}">
                 <button type="button" class="btn btn-outline-primary me-2">Аккаунт
                 </button>
             </a>
@@ -54,9 +54,6 @@
             <br>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
         </form>
-        <#if message??>
-            ${message}
-        </#if>
     </main>
 </div>
 </body>

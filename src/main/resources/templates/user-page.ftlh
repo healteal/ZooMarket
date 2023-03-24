@@ -54,6 +54,7 @@
         <div class="col-8 border border-primary"><h3>${marketUser.number}</h3></div>
     </div>
 </div>
+<br>
 <#if products??>
     <div class="container">
         <div class="row row-cols-3">
