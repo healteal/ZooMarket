@@ -77,4 +77,29 @@ public class ProductController {
         productRepository.save(temporary);
         return "redirect:/product/{id}";
     }
+
+    @GetMapping("/about")
+    public String aboutPage(Model model,
+                            Principal principal) {
+        if (productService.getUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+        }
+        return "about-page";
+    }
+
+    @GetMapping("/search")
+    public String searchPage(Model model,
+                             Principal principal,
+                             @RequestParam(name = "search") String search) {
+        if (productService.getUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+        }
+        model.addAttribute("products", productService.listProducts()
+                .stream()
+                .filter(product -> product.getDescription().toLowerCase().contains(search.toLowerCase())
+                        || product.getName().toLowerCase().contains(search.toLowerCase()))
+                .toList());
+        model.addAttribute("searchedWord", search);
+        return "search";
+    }
 }

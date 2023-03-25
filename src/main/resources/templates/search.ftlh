@@ -16,11 +16,11 @@
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <#if marketUser??>
-        <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+            <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
         </#if>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get" action="/search">
-        <input type="text" class="form-control form-control-dark text-bg-dark" placeholder="Поиск" name="search">
-    </form>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get" action="/search">
+            <input type="text" class="form-control form-control-dark text-bg-dark" placeholder="Поиск" name="search">
+        </form>
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
         <#if marketUser??>
@@ -31,18 +31,19 @@
             <a href="/logout">
                 <button type="button" class="btn btn-primary">Выйти</button>
             </a>
-            <#else>
-                <a href="/login">
-                    <button type="button" class="btn btn-outline-primary me-2">Войти
-                    </button>
-                </a>
-                <a href="/registration">
-                    <button type="button" class="btn btn-primary">Регистрация</button>
-                </a>
+        <#else>
+            <a href="/login">
+                <button type="button" class="btn btn-outline-primary me-2">Войти
+                </button>
+            </a>
+            <a href="/registration">
+                <button type="button" class="btn btn-primary">Регистрация</button>
+            </a>
         </#if>
     </div>
 </header>
 <#if products??>
+    <h2 style="text-align: center">Поиск по слову: ${searchedWord}</h2>
     <div class="container">
         <div class="row row-cols-3">
             <#list products as product>
