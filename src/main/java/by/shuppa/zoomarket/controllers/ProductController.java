@@ -19,6 +19,7 @@ import java.security.Principal;
 public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
+
     @GetMapping("/")
     public String mainPage(Model model,
                            Principal principal) {

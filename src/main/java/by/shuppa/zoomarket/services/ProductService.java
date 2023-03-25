@@ -29,6 +29,11 @@ public class ProductService {
                            MultipartFile secondImage,
                            MultipartFile thirdImage) {
         product.setMarketUser(getUserByPrincipal(principal));
+        if (product.getDescription().length() > 21) {
+            product.setShortDescription(product.getDescription().substring(0, 20) + "...");
+        } else {
+            product.setShortDescription(product.getDescription());
+        }
         addImage(product, firstImage);
         addImage(product, secondImage);
         addImage(product, thirdImage);

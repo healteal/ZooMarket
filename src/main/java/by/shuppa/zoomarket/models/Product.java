@@ -20,6 +20,8 @@ public class Product {
     private String name;
     @Column(columnDefinition = "nvarchar(255)")
     private String description;
+    @Column(columnDefinition = "nvarchar(255)")
+    private String shortDescription;
     private Double price;
     private Double rating;
     @Column(columnDefinition = "nvarchar(255)")
