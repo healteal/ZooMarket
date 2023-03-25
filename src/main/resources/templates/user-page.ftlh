@@ -68,7 +68,7 @@
                         <div class="card-body" bis_skin_checked="1">
                             <p class="card-text">
                             <h3>${product.name}</h3>
-                            <h5>${product.description}</h5>
+                            <h5>${product.shortDescription}</h5>
                             <br>
                             <div class="d-flex justify-content-between align-items-center" bis_skin_checked="1">
                                 <div class="btn-group" bis_skin_checked="1">
