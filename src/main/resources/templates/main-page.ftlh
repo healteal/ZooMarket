@@ -16,7 +16,11 @@
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <#if marketUser??>
+        <#if userRole == "USER">
         <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+            <#elseif userRole == "ADMIN">
+                <li><b><a href="/admin" class="nav-link px-4 link-dark">Панель администратора</a></b></li>
+        </#if>
         </#if>
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get" action="/search">
         <input type="text" class="form-control form-control-dark text-bg-dark" placeholder="Поиск" name="search">

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Аккаунт ${marketUser.username}</title>
+    <title>Администратор</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -15,7 +15,7 @@
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
-        <#if userRole??>
+        <#if marketUser??>
             <#if userRole == "USER">
                 <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
             <#elseif userRole == "ADMIN">
@@ -46,52 +46,5 @@
         </#if>
     </div>
 </header>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-4 text-center border border-primary"><h3>Логин</h3></div>
-        <div class="col-8 border border-primary"><h3>${marketUser.username}</h3></div>
-    </div>
-    <div class="row">
-        <div class="col-4 text-center border border-primary"><h3>Почта</h3></div>
-        <div class="col-8 border border-primary"><h3>${marketUser.email}</h3></div>
-    </div>
-    <div class="row">
-        <div class="col-4 text-center border border-primary"><h3>Телефон</h3></div>
-        <div class="col-8 border border-primary"><h3>${marketUser.number}</h3></div>
-    </div>
-</div>
-<br>
-<#if products??>
-    <div class="container">
-        <div class="row row-cols-3">
-            <#list products as product>
-                <div class="col-4">
-                    <div class="card shadow-sm" bis_skin_checked="1">
-                        <br>
-                        <svg class="bd-placeholder-img card-img-top" height="250px">
-                            <image href="/product/image/${product.getIdOfMainImage()}" height="100%" width="100%" />
-                        </svg>
-                        <div class="card-body" bis_skin_checked="1">
-                            <p class="card-text">
-                            <h3>${product.name}</h3>
-                            <h5>${product.shortDescription}</h5>
-                            <br>
-                            <div class="d-flex justify-content-between align-items-center" bis_skin_checked="1">
-                                <div class="btn-group" bis_skin_checked="1">
-                                    <a href="/product/${product.id}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                                            Подробнее
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </#list>
-        </div>
-    </div>
-</#if>
 </body>
 </html>

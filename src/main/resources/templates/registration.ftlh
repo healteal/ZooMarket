@@ -15,20 +15,8 @@
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
-        <#if marketUser??>
-            <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
-        </#if>
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
-        <#if marketUser??>
-            <a href="/user/${marketUser.id}">
-                <button type="button" class="btn btn-outline-primary me-2">Аккаунт
-                </button>
-            </a>
-            <a href="/logout">
-                <button type="button" class="btn btn-primary">Выйти</button>
-            </a>
-        <#else>
             <a href="/login">
                 <button type="button" class="btn btn-outline-primary me-2">Войти
                 </button>
@@ -36,26 +24,34 @@
             <a href="/registration">
                 <button type="button" class="btn btn-primary">Регистрация</button>
             </a>
-        </#if>
     </div>
 </header>
 <div class="w-50 mx-auto">
     <main class="form-signin w-50 m-auto">
         <form method="post" action="/registration">
             <div class="form-floating" bis_skin_checked="1">
-                <input type="username" class="form-control" id="floatingInput" name="username" placeholder="Логин" required="required">
+                <input type="username" class="form-control" id="floatingInput" name="username" placeholder="Логин"
+                       required="required">
             </div>
             <br>
             <div class="form-floating" bis_skin_checked="1">
-                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Электронная почта" required="required">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Электронная почта"
+                       required="required">
             </div>
             <br>
             <div class="form-floating" bis_skin_checked="1">
-                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль" required="required">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль"
+                       required="required">
             </div>
             <br>
             <div class="form-floating" bis_skin_checked="1">
-                <input type="number" class="form-control" id="floatingInput" name="number" placeholder="Телефон" required="required">
+                <input type="number" class="form-control" id="floatingInput" name="number" placeholder="Телефон"
+                       required="required">
+            </div>
+            <br>
+            <div class="form-floating" bis_skin_checked="1">
+                <input type="password" class="form-control" id="floatingInput" name="isAdmin"
+                       placeholder="Введите пароль, если вы администратор">
             </div>
             <br>
             <br>

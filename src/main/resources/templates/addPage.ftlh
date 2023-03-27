@@ -64,9 +64,9 @@
         </div>
         <br>
         <div>
-            <input type="file" name = "first_image" required="required">
-            <input type="file" name = "second_image" required="required">
-            <input type="file" name = "third_image" required="required">
+            <input placeholder="Добавить" type="file" name = "first_image" required="required">
+            <input value="Добавить" type="file" name = "second_image" required="required">
+            <input value="Добавить" type="file" name = "third_image" required="required">
         </div>
         <br>
         <div class="text-center">

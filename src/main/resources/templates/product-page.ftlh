@@ -16,8 +16,15 @@
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <#if marketUser??>
-            <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+            <#if userRole == "USER">
+                <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
+            <#elseif userRole == "ADMIN">
+                <li><b><a href="/admin" class="nav-link px-4 link-dark">Панель администратора</a></b></li>
+            </#if>
         </#if>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get" action="/search">
+            <input type="text" class="form-control form-control-dark text-bg-dark" placeholder="Поиск" name="search">
+        </form>
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
         <#if marketUser??>
@@ -98,7 +105,8 @@
     </div>
     <div class="row">
         <div class="col-4 text-center border border-primary"><h3>Автор</h3></div>
-        <div class="col-8 border border-primary"><h3>${product.marketUser.username}</h3></div>
+        <div class="col-8 border border-primary"><a href="/user/${product.marketUser.id}">
+                <h3>${product.marketUser.username}</h3></a></div>
     </div>
     <div class="row">
         <div class="col-4 text-center border border-primary"><h3>Номер</h3></div>
