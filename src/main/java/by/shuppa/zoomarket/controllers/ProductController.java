@@ -3,6 +3,7 @@ package by.shuppa.zoomarket.controllers;
 import by.shuppa.zoomarket.models.Product;
 import by.shuppa.zoomarket.repositories.ProductRepository;
 import by.shuppa.zoomarket.services.ProductService;
+import by.shuppa.zoomarket.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +20,18 @@ import java.security.Principal;
 public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
+    private final UserService userService;
 
     @GetMapping("/")
     public String mainPage(Model model,
                            Principal principal) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+            model.addAttribute("userRole", productService.getUserByPrincipal(principal)
+                    .getUserRoles()
+                    .stream()
+                    .findFirst()
+                    .orElseThrow());
         }
         model.addAttribute("products", productService.listProducts()
                 .stream()
@@ -38,6 +45,7 @@ public class ProductController {
                               Principal principal) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
         return "addPage";
     }
@@ -61,6 +69,7 @@ public class ProductController {
                 model.addAttribute("productOwner", Boolean.TRUE);
             }
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
         model.addAttribute("product", productRepository.findById(id).orElseThrow());
         model.addAttribute("productImages", productRepository.findById(id).orElseThrow().getProductImages());
@@ -83,6 +92,7 @@ public class ProductController {
                             Principal principal) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
         return "about-page";
     }
@@ -93,6 +103,7 @@ public class ProductController {
                              @RequestParam(name = "search") String search) {
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
         model.addAttribute("products", productService.listProducts()
                 .stream()

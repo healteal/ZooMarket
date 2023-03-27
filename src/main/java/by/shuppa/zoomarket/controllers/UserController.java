@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -30,7 +31,7 @@ public class UserController {
                         Model model) {
         if (userService.getMarketUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("user", userService.getMarketUserByPrincipal(principal));
-            log.info("logged as {}", userService.getMarketUserByPrincipal(principal).getUsername());
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
         } else {
             model.addAttribute("message", "Неверный логин или пароль");
         }
@@ -39,12 +40,14 @@ public class UserController {
 
     @PostMapping("/registration")
     public String createUser(MarketUser marketUser,
-                             Model model) {
+                             Model model,
+                             @RequestParam(name = "isAdmin", required = false) String admin) {
         if (userRepository.findByUsername(marketUser.getUsername()) != null) {
             model.addAttribute("message", "Такой логин уже есть в системе.");
             return "/registration";
         }
-        if (userService.createUser(marketUser)) {
+        boolean isAdmin = admin.equals("admin");
+        if (userService.createUser(marketUser, isAdmin)) {
             return "redirect:/login";
         } else {
             model.addAttribute("message", "Неверный ввод");
@@ -56,11 +59,16 @@ public class UserController {
     public String userPage(@PathVariable Long id,
                            Model model,
                            Principal principal) {
-        if (!userRepository.findById(id).orElseThrow().equals(userRepository.findByUsername(principal.getName()))) {
-            return "redirect:/";
-        }
         model.addAttribute("marketUser", userRepository.findById(id).orElseThrow());
         model.addAttribute("products", userRepository.findById(id).orElseThrow().getProducts());
+        if (userService.getMarketUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("userRole", userService.getMarketUserRole(principal));
+        }
         return "user-page";
+    }
+
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin-page";
     }
 }
