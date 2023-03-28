@@ -91,8 +91,13 @@
             <div class="col-4 text-center border border-primary"><h3>Цена</h3></div>
             <input type="number" name="price" class="col-8 border border-primary" placeholder="${product.price} BYN"/>
         </div>
-        <input type="submit" value="Изменить">
+        <br>
+        <input type="submit" class="btn btn-outline-primary me-2" value="Изменить">
     </form>
+    <br>
+        <form action="/product/delete/${product.id}" method="post">
+            <input type="submit" class="btn btn-outline-primary me-2" value="Удалить">
+        </form>
 </div>
 <#else>
     <div class="row">
