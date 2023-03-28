@@ -47,7 +47,7 @@ public class ProductController {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
             model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
-        return "addPage";
+        return "add-product";
     }
 
     @PostMapping("/add")
@@ -81,8 +81,17 @@ public class ProductController {
                               @RequestParam(name = "description", required = false) String description,
                               @RequestParam(name = "price", required = false) Double price) {
         Product temporary = productRepository.findById(id).orElseThrow();
-        temporary.setDescription(description);
-        temporary.setPrice(price);
+        if (description.length() != 0) {
+            temporary.setDescription(description);
+            if (temporary.getDescription().length() > 21) {
+                temporary.setShortDescription(temporary.getDescription().substring(0, 20) + "...");
+            } else {
+                temporary.setShortDescription(temporary.getDescription());
+            }
+        }
+        if (price != null) {
+            temporary.setPrice(price);
+        }
         productRepository.save(temporary);
         return "redirect:/product/{id}";
     }
@@ -112,5 +121,11 @@ public class ProductController {
                 .toList());
         model.addAttribute("searchedWord", search);
         return "search";
+    }
+
+    @PostMapping("/product/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
+        return "redirect:/";
     }
 }

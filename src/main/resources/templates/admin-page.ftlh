@@ -15,36 +15,57 @@
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
-        <#if marketUser??>
-            <#if userRole == "USER">
-                <li><b><a href="/add" class="nav-link px-4 link-dark">Добавить</a></b></li>
-            <#elseif userRole == "ADMIN">
-                <li><b><a href="/admin" class="nav-link px-4 link-dark">Панель администратора</a></b></li>
-            </#if>
-        </#if>
+        <li><b><a href="/admin" class="nav-link px-4 link-dark">Панель администратора</a></b></li>
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get" action="/search">
             <input type="text" class="form-control form-control-dark text-bg-dark" placeholder="Поиск" name="search">
         </form>
     </ul>
     <div class="col-md-3 text-end" bis_skin_checked="1">
-        <#if marketUser??>
-            <a href="/user/${marketUser.id}">
-                <button type="button" class="btn btn-outline-primary me-2">Аккаунт
-                </button>
-            </a>
-            <a href="/logout">
-                <button type="button" class="btn btn-primary">Выйти</button>
-            </a>
-        <#else>
-            <a href="/login">
-                <button type="button" class="btn btn-outline-primary me-2">Войти
-                </button>
-            </a>
-            <a href="/registration">
-                <button type="button" class="btn btn-primary">Регистрация</button>
-            </a>
-        </#if>
+        <a href="/logout">
+            <button type="button" class="btn btn-primary">Выйти</button>
+        </a>
     </div>
 </header>
+<br>
+<table class="table table-hover table-dark">
+    <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Номер телефона</th>
+        <th scope="col">Активность</th>
+        <th scope="col">Роли</th>
+        <th scope="col">Бан</th>
+        <th scope="col">Подробная информация</th>
+    </tr>
+    <#list listOfUsers as user>
+        <tr>
+            <th scope="col">${user.email}</th>
+            <th scope="col">${user.number}</th>
+            <th scope="col">
+                <#if user.enable>
+                    Активен
+                <#else>
+                    Неактивен
+                </#if>
+            </th>
+            <th scope="col">
+                <#list user.userRoles as role>
+                    ${role.name()}
+                </#list>
+            </th>
+            <th>
+                <#if user.enable == true>
+                    <form action="/admin/ban/${user.id}" method="post">
+                        <input type="submit" class="btn btn-light" value="Забанить">
+                    </form>
+                <#else>
+                    <form action="/admin/unban/${user.id}" method="post">
+                        <input type="submit" class="btn btn-light" value="Разбанить">
+                    </form>
+                </#if>
+            </th>
+            <th><a href="/user/${user.id}">Информация</a></th>
+        </tr>
+    </#list>
+</table>
 </body>
 </html>

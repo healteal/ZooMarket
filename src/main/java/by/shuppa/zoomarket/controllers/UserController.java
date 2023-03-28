@@ -1,6 +1,7 @@
 package by.shuppa.zoomarket.controllers;
 
 import by.shuppa.zoomarket.models.MarketUser;
+import by.shuppa.zoomarket.models.UserRole;
 import by.shuppa.zoomarket.repositories.UserRepository;
 import by.shuppa.zoomarket.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -62,13 +63,31 @@ public class UserController {
         model.addAttribute("marketUser", userRepository.findById(id).orElseThrow());
         model.addAttribute("products", userRepository.findById(id).orElseThrow().getProducts());
         if (userService.getMarketUserByPrincipal(principal).getUsername() != null) {
+            model.addAttribute("user", userService.getMarketUserByPrincipal(principal));
             model.addAttribute("userRole", userService.getMarketUserRole(principal));
         }
         return "user-page";
     }
 
     @GetMapping("/admin")
-    public String adminPage() {
+    public String adminPage(Model model) {
+        model.addAttribute("listOfUsers", userRepository.findByUserRolesContains(UserRole.USER));
         return "admin-page";
+    }
+
+    @PostMapping("/admin/ban/{id}")
+    public String banUser(@PathVariable Long id) {
+        MarketUser user = userRepository.findById(id).orElseThrow();
+        user.setEnable(false);
+        userRepository.save(user);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/unban/{id}")
+    public String unbanUser(@PathVariable Long id) {
+        MarketUser user = userRepository.findById(id).orElseThrow();
+        user.setEnable(true);
+        userRepository.save(user);
+        return "redirect:/admin";
     }
 }
