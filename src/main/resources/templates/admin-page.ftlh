@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: url('/static/images/background.jpg'); background-size: 100% 100%; background-attachment: fixed">
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"></a>
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
+        <li><a href="/"><img src="/static/images/headLogo.jpg" alt="" width="40" height="40"></a></li>
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <li><b><a href="/admin" class="nav-link px-4 link-dark">Панель администратора</a></b></li>
@@ -27,8 +28,9 @@
     </div>
 </header>
 <br>
-<table class="table table-hover table-dark">
+<table class="table table-striped table-sm">
     <tr>
+        <th scope="col">Логин</th>
         <th scope="col">Email</th>
         <th scope="col">Номер телефона</th>
         <th scope="col">Активность</th>
@@ -38,6 +40,7 @@
     </tr>
     <#list listOfUsers as user>
         <tr>
+            <th scope="col">${user.username}</th>
             <th scope="col">${user.email}</th>
             <th scope="col">${user.number}</th>
             <th scope="col">

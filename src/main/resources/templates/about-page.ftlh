@@ -13,6 +13,7 @@
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"></a>
     <ul class="nav col-12 col-md-auto mb-4 justify-content-center mb-md-0">
+        <li><a href="/"><img src="/static/images/headLogo.jpg" alt="" width="40" height="40"></a></li>
         <li><b><a href="/" class="nav-link px-4 link-secondary">Главная страница</a></b></li>
         <li><b><a href="/about" class="nav-link px-4 link-dark">О нас</a></b></li>
         <#if marketUser??>
@@ -47,5 +48,8 @@
     </div>
 </header>
 <h1 style="text-align: center">Пет проект на языке java с использованием Spring framework Шуппо К.Г.</h1>
+<div class="text-center">
+    <img src="/static/images/aboutDog.png" alt="" width="1200" height="1280">
+</div>
 </body>
 </html>
