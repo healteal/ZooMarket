@@ -23,9 +23,9 @@ public class Product {
     @Column(columnDefinition = "nvarchar(255)")
     private String shortDescription;
     private Double price;
-    private Double rating;
     @Column(columnDefinition = "nvarchar(255)")
     private Long idOfMainImage;
+    private TypeOfProduct typeOfProduct;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<ProductImage> productImages = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

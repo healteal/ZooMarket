@@ -21,10 +21,27 @@ public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
     private final UserService userService;
-
     @GetMapping("/")
     public String mainPage(Model model,
-                           Principal principal) {
+                           Principal principal,
+                           @RequestParam(name = "previousPage", required = false) Long previousPage,
+                           @RequestParam(name = "nextPage", required = false) Long nextPage) {
+        long page = 1L;
+        if (previousPage != null) {
+            page = previousPage;
+        } else if (nextPage != null) {
+            page = nextPage;
+        }
+        model.addAttribute("pageNumber", page);
+        if (page > 1) {
+            model.addAttribute("previousPage", Boolean.TRUE);
+        }
+        if (!(page * 9 >= productService.listProducts()
+                .stream()
+                .filter(product -> product.getMarketUser().isEnable())
+                .count())) {
+            model.addAttribute("nextPage", Boolean.TRUE);
+        }
         if (productService.getUserByPrincipal(principal).getUsername() != null) {
             model.addAttribute("marketUser", productService.getUserByPrincipal(principal));
             model.addAttribute("userRole", productService.getUserByPrincipal(principal)
@@ -33,10 +50,15 @@ public class ProductController {
                     .findFirst()
                     .orElseThrow());
         }
-        model.addAttribute("products", productService.listProducts()
-                .stream()
-                .limit(9)
-                .toList());
+        if (productService.listProducts().stream().anyMatch(product -> product.getMarketUser().isEnable())) {
+            model.addAttribute("products", productService.listProducts()
+                    .stream().filter(product -> product.getMarketUser().isEnable())
+                    .skip(9 * (page - 1))
+                    .limit(9)
+                    .toList());
+        } else {
+            model.addAttribute("message", "Ничего не найдено :(");
+        }
         return "main-page";
     }
 
@@ -54,9 +76,10 @@ public class ProductController {
     public String addProduct(@RequestParam(name = "first_image") MultipartFile firstImage,
                              @RequestParam(name = "second_image") MultipartFile secondImage,
                              @RequestParam(name = "third_image") MultipartFile thirdImage,
+                             @RequestParam(name = "type_of_product") String typeOfProduct,
                              Product product,
                              Principal principal) {
-        productService.addProduct(principal, product, firstImage, secondImage, thirdImage);
+        productService.addProduct(principal, product, firstImage, secondImage, thirdImage, typeOfProduct);
         return "redirect:/";
     }
 
