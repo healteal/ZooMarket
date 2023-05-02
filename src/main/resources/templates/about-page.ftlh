@@ -47,9 +47,10 @@
         </#if>
     </div>
 </header>
-<h1 style="text-align: center">Пет проект на языке java с использованием Spring framework Шуппо К.Г.</h1>
+<h1 style="text-align: center">Пет проект на языке JAVA с использованием Spring framework</h1>
+<h1 style="text-align: center">Автор: Шуппо К.Г.</h1>
 <div class="text-center">
-    <img src="/static/images/aboutDog.png" alt="" width="1200" height="1280">
+    <img src="/static/images/aboutDog.png" alt="" width="500" height="500">
 </div>
 </body>
 </html>

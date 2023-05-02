@@ -80,10 +80,10 @@
     </a>
 </div>
 <br>
-<div class="container">
+<div class="container bg-light">
     <#if productOwner??>
     <form action="/edit/product/${product.id}" method="post">
-        <div class="row">
+        <div class="row rounded">
             <div class="col-4 text-center border border-primary"><h3>Описание</h3></div>
             <input name="description" class="col-8 border border-primary" style="word-wrap: break-word"
                    placeholder="${product.description}"/>
